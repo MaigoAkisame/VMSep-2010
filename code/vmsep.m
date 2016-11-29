@@ -25,7 +25,7 @@ function vmsep(fileMix, fileVoice, fileAccom)
             error('Wrong number of input arguments.');
     end
 
-    [x fs] = wavread(fileMix);
+    [x fs] = audioread(fileMix);
     if (size(x,2) ~= 1) error('Input signal must be mono-channel.'); end
     if (fs ~= 16000)
         error('Input signal must be sampled at 16 kHz');
@@ -51,8 +51,8 @@ function vmsep(fileMix, fileVoice, fileAccom)
     midi = extractPitch(config.configMfcc, config.configEsi, x, config.mfccHmm, config.esiHmm);
     [voice accom] = separate(config.configSep, x, midi);
     
-    wavwrite(voice, fs, fileVoice);
-    wavwrite(accom, fs, fileAccom);
+    audiowrite(fileVoice, voice, fs);
+    audiowrite(fileAccom, accom, fs);
 end
 
 function flag = endInWav(s)
