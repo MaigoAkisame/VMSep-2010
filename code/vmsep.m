@@ -26,7 +26,7 @@ function vmsep(fileMix, fileVoice, fileAccom)
     end
 
     [x fs] = audioread(fileMix);
-    x = mean(resample(x, 16000, fs));
+    x = mean(resample(x, 16000, fs), 2);
     fs = 16000;
     
     config.configMfcc = configMfcc;
