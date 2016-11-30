@@ -27,9 +27,8 @@ function vmsep(fileMix, fileVoice, fileAccom)
 
     [x fs] = audioread(fileMix);
     if (size(x,2) ~= 1) error('Input signal must be mono-channel.'); end
-    if (fs ~= 16000)
-        error('Input signal must be sampled at 16 kHz');
-    end
+    x = mean(resample(x, 16000, fs));
+    fs = 16000;
     
     config.configMfcc = configMfcc;
     config.configEsi = configEsi;
