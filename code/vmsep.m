@@ -26,7 +26,6 @@ function vmsep(fileMix, fileVoice, fileAccom)
     end
 
     [x fs] = audioread(fileMix);
-    if (size(x,2) ~= 1) error('Input signal must be mono-channel.'); end
     x = mean(resample(x, 16000, fs));
     fs = 16000;
     
